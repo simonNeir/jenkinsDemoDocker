@@ -17,6 +17,8 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'This is the deploy stage'
+        sh 'docker build -t simonneir/jenkinsopdrsn:1.0 .'
+        sh 'docker push simonneir/jenkinsopdrsn:1.0'
       }
     }
   }
