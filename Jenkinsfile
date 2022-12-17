@@ -1,24 +1,15 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        echo 'This is the build stage'
-        node('Node19.2') {
-          sh 'npm init -y'
-          sh 'npm i'
+    agent {
+        docker {
+            image 'node:lts-bullseye-slim' 
+            args '-p 3000:3000' 
         }
-      }
     }
-    stage('Test') {
-      steps {
-        echo 'This is the test stage'
-      }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'npm install' 
+            }
+        }
     }
-    stage('Deploy') {
-      steps {
-        echo 'This is the deploy stage'
-      }
-    }
-  }
 }
